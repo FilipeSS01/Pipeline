@@ -1,0 +1,2 @@
+get_tc 3
+get_tc 4

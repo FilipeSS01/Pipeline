@@ -11,7 +11,7 @@ public class IF {
 
     public IF(String path) {
         setPc(0);
-        setInstructions(FileManager.stringReader(path + "data/exemplo.txt"));
+        setInstructions(FileManager.stringReader(path));
     }
 
     public String search() {
