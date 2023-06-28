@@ -10,7 +10,6 @@ public class App {
         String path = IF.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
         // Pipeline
-
         IF stage1 = new IF(path);
         ID stage2 = new ID();
         EX stage3 = new EX();

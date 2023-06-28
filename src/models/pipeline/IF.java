@@ -2,7 +2,7 @@ package models.pipeline;
 
 import java.util.ArrayList;
 
-import fileManagers.FileManager;
+import models.fileManagers.FileManager;
 import models.utils.Utils;
 
 public class IF {

@@ -1,6 +1,6 @@
 package models.pipeline;
 
-import abstracts.Instructions;
+import models.abstracts.Instructions;
 import models.instruction.*;
 
 public class ID {

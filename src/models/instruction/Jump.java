@@ -1,6 +1,6 @@
 package models.instruction;
 
-import abstracts.Instructions;
+import models.abstracts.Instructions;
 
 public class Jump extends Instructions {
 

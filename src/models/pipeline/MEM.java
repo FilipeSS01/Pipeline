@@ -1,6 +1,6 @@
 package models.pipeline;
 
-import abstracts.Instructions;
+import models.abstracts.Instructions;
 import models.instruction.GetTC;
 import models.instruction.Immediate;
 import models.instruction.Jump;
