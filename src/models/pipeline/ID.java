@@ -23,6 +23,9 @@ public class ID {
                 offset = convert(subInstruction[0], false); // offset
 
                 // Return rs = Value of base register; rt = immediate(rs + offset); 
+                Immediate immediate = new Immediate(opcode, rs, rt, offset);
+                immediate.setImmediate(immediate.getRs() + immediate.getOffset());
+                return immediate;
             } else if (instruction[0].equals("beq") || instruction[0].equals("bne")) {
                 rs = Utils.getIndexRegister(convert(instruction[1], true)); // rs = Value of register[ at the instruction ]
                 rt = Utils.getIndexRegister(convert(instruction[2], true)); // rt = Value of register[ at the instruction ]

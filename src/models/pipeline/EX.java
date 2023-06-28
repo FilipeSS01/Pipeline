@@ -9,10 +9,6 @@ public class EX {
     public Instructions execute(Instructions instruction) {
         if (instruction instanceof Immediate) {
             switch (instruction.getOpcode()) {
-                case "lw":
-                case "sw":
-                    instruction.setImmediate(instruction.getRs() + instruction.getOffset());
-                    break;
                 case "beq":
                     if (instruction.getRs() == instruction.getRt())
                         Utils.setPc(instruction.getOffset());
@@ -53,6 +49,7 @@ public class EX {
                     Utils.setPc(instruction.getRs());
                     break;
             }
+            return instruction;
         } else if (instruction instanceof GetTC) {
             return instruction;
         }
