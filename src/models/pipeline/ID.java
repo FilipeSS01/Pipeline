@@ -15,13 +15,13 @@ public class ID {
             int offset;
             if (instruction[0].equals("lw") || instruction[0].equals("sw")) {
                 String[] subInstruction = instruction[2].replaceAll("[()]", " ").split(" ");
-                rs = Utils.getIndexRegister(convert(subInstruction[1], true)); // Value of base register -> rs = register[ rs ]
-                if(instruction[1].equals("$lo") || instruction[1].equals("$hi"))
-                    rt = instruction[1].equals("$lo") ? 33 : 32; // rt = index of register lo or hi (index register destination)
-                else
-                    rt = convert(instruction[1], true); // rt = index of register in the instruction (lw = index register destination; sw = index memory destination)
+                
                 offset = convert(subInstruction[0], false); // offset
-
+                rs = Utils.getIndexRegister(convert(subInstruction[1], true)); // Value of base register -> rs = register[ rs ]
+                
+                int value =  instruction[1].equals("$lo") ? 33 : instruction[1].equals("$hi") ? 32 : convert(instruction[1], true);
+                rt = instruction[0].equals("lw") ? value : Utils.getIndexRegister(value);
+                               
                 // Return rs = Value of base register; rt = immediate(rs + offset); 
                 Immediate immediate = new Immediate(opcode, rs, rt, offset);
                 immediate.setImmediate(immediate.getRs() + immediate.getOffset());

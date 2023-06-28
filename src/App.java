@@ -9,6 +9,8 @@ public class App {
     public static void main(String[] args) throws Exception {
         String path = IF.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
+        Utils.setIndexRegister(0, 0);
+
         // Pipeline
         IF stage1 = new IF(path);
         ID stage2 = new ID();
@@ -20,7 +22,7 @@ public class App {
             stage5.write(stage4.accesses(stage3.execute(stage2.decoding(stage1.search()))));
         }
 
-        System.out.println(Utils.getIndexRegister(3));
-        System.out.println(Utils.getIndexRegister(4));
+        // System.out.println(Utils.getIndexRegister(3));
+        // System.out.println(Utils.getIndexRegister(4));
     }
 }

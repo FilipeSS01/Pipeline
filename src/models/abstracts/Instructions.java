@@ -40,9 +40,7 @@ public abstract class Instructions {
     }
 
     // Create instruction binary
-    protected int generateBinary(String instruction) {
-        return 0;
-    }
+    protected abstract int generateBinary();
 
     // Gets and Sets
     public String getOpcode() {

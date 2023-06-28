@@ -36,13 +36,13 @@ public class EX {
                     instruction.setResult(instruction.getRs() + instruction.getRt());
                     break;
                 case "sub":
-                    instruction.setResult(instruction.getRs() + instruction.getRt());
+                    instruction.setResult(instruction.getRs() - instruction.getRt());
                     break;
                 case "mult":
                     instruction.setResult(instruction.getRs() * instruction.getRt());
                     break;
                 case "div":
-                    instruction.setResult(instruction.getRs() * instruction.getRt());
+                    instruction.setResult(instruction.getRs() / instruction.getRt());
                     instruction.setResult2(instruction.getRs() % instruction.getRt());
                     break;
                 case "jr":
