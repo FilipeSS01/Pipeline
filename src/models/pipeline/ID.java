@@ -2,6 +2,7 @@ package models.pipeline;
 
 import models.abstracts.Instructions;
 import models.instruction.*;
+import models.utils.Utils;
 
 public class ID {
     public Instructions decoding(String instr) {
@@ -11,32 +12,34 @@ public class ID {
         int rt;
 
         if (isImmediate(opcode)) {
-            int immediate;
+            int offset;
             if (instruction[0].equals("lw") || instruction[0].equals("sw")) {
                 String[] subInstruction = instruction[2].replaceAll("[()]", " ").split(" ");
-                rs = convert(subInstruction[1], true);
+                rs = Utils.getIndexRegister(convert(subInstruction[1], true)); // Value of base register -> rs = register[ rs ]
                 if(instruction[1].equals("$lo") || instruction[1].equals("$hi"))
-                    rt = instruction[1].equals("$lo") ? 33 : 32;
+                    rt = instruction[1].equals("$lo") ? 33 : 32; // rt = index of register lo or hi (index register destination)
                 else
-                    rt = convert(instruction[1], true);
-                immediate = convert(subInstruction[0], false);
+                    rt = convert(instruction[1], true); // rt = index of register in the instruction (lw = index register destination; sw = index memory destination)
+                offset = convert(subInstruction[0], false); // offset
+
+                // Return rs = Value of base register; rt = immediate(rs + offset); 
             } else if (instruction[0].equals("beq") || instruction[0].equals("bne")) {
-                rs = convert(instruction[1], true);
-                rt = convert(instruction[2], true);
-                immediate = convert(instruction[3], false);
+                rs = Utils.getIndexRegister(convert(instruction[1], true)); // rs = Value of register[ at the instruction ]
+                rt = Utils.getIndexRegister(convert(instruction[2], true)); // rt = Value of register[ at the instruction ]
+                offset = convert(instruction[3], false); // line to jump instruction (pc = offset(immediate))
             } else {
-                rs = convert(instruction[1], true);
-                immediate = convert(instruction[2], false);
+                rs = Utils.getIndexRegister(convert(instruction[1], true)); // rs = Value of register[ at the instruction ]
+                offset = convert(instruction[2], false); // line to jump instruction (pc = offset(immediate))
                 rt = 0;
             }
-            return new Immediate(opcode, rs, rt, immediate);
+            return new Immediate(opcode, rs, rt, offset);
         } else if (isRegister(opcode)) {
-            rs = convert(instruction[2], true);
-            rt = convert(instruction[3], true);
-            int rd = convert(instruction[1], true);
+            rs = Utils.getIndexRegister(convert(instruction[2], true)); // Value of register
+            rt = Utils.getIndexRegister(convert(instruction[3], true)); // Value of register
+            int rd = convert(instruction[1], true); // index of register destination
             return new Register(opcode, rs, rt, rd, 0b10000, 0b100000);
         } else if (isJump(opcode) || isGetTC(opcode)) {
-            int target = convert(instruction[1], false);
+            int target = convert(instruction[1], false); // Line to add PC
             return isGetTC(opcode) ? new GetTC(opcode, target) : new Jump(opcode, target);
         }
         System.out.println(opcode);
