@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Path;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.pipeline.EX;
@@ -15,7 +14,6 @@ import models.pipeline.WB;
 import models.utils.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
 
 public class InterfaceGrafica extends Application {
 
