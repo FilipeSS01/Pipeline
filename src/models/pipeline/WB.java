@@ -7,7 +7,7 @@ import models.instruction.GetTC;
 import models.instruction.Immediate;
 import models.instruction.Jump;
 import models.instruction.Register;
-import models.memory.RegisterMemory;
+import models.utils.Utils;
 
 public class WB {
 
@@ -34,7 +34,7 @@ public class WB {
             System.out.println(instruction.getShamt());
             System.out.println(instruction.getFunct());
         } else if (instruction instanceof GetTC) {
-            RegisterMemory.setIndexRegister(instruction.getTarget(), getIn().nextInt());
+            Utils.setIndexRegister(instruction.getTarget(), getIn().nextInt());
         }
     }
 

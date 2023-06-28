@@ -7,14 +7,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Path;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import models.memory.MainMemory;
-import models.memory.RegisterMemory;
 import models.pipeline.EX;
 import models.pipeline.ID;
 import models.pipeline.IF;
 import models.pipeline.MEM;
 import models.pipeline.WB;
-import utils.FileManager;
+import models.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -71,12 +69,12 @@ public class InterfaceGrafica extends Application {
 
     private void runPipeline() {
         if (stage1 != null) {
-            while (stage1.getPc() < stage1.getInstructions().size()) {
+            while (Utils.getPc() < stage1.getInstructions().size()) {
                 stage5.write(stage4.accesses(stage3.execute(stage2.decoding(stage1.search()))));
             }
 
-            outputTextArea.appendText("\nRegister 3: " + RegisterMemory.getIndexRegister(3));
-            outputTextArea.appendText("\nRegister 4: " + RegisterMemory.getIndexRegister(4));
+            outputTextArea.appendText("\nRegister 3: " + Utils.getIndexRegister(3));
+            outputTextArea.appendText("\nRegister 4: " + Utils.getIndexRegister(4));
         } else {
             outputTextArea.setText("No file selected.");
         }
