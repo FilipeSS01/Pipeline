@@ -6,22 +6,37 @@ public abstract class Instructions {
     protected int immediate;
     protected int offset;
     protected int rs;
+    protected int valueRS;
     protected int rt;
+    protected int valueRT;
     protected int rd;
     protected int shamt;
     protected int funct;
     protected int encoding;
-    protected int result;
-    protected int result2;
+    protected int alu;
+    protected int hi;
+    protected int lo;
 
     // Construction for Instruction Immediate
-    protected Instructions(String opcode, int rs, int rt, int offset) {
+    protected Instructions(String opcode, int rs, int valueRS, int rt, int valueRT, int offset, int immediate) {
         setOpcode(opcode);
         setRs(rs);
+        setValueRS(valueRS);
         setRt(rt);
+        setValueRT(valueRT);
         setOffset(offset);
-        // setImmediate(immediate);
+        setImmediate(immediate);
     }
+    
+    protected Instructions(String opcode, int rs, int valueRS, int rt, int valueRT, int offset) {
+        setOpcode(opcode);
+        setRs(rs);
+        setValueRS(valueRS);
+        setRt(rt);
+        setValueRT(valueRT);
+        setOffset(offset);
+    }
+
 
     // Construction for Instruction Jump and GetTc
     protected Instructions(String opcode, int target) {
@@ -30,10 +45,12 @@ public abstract class Instructions {
     }
 
     // Construction for Instruction Register
-    protected Instructions(String opcode, int rs, int rt, int rd, int shamt, int funct) {
+    protected Instructions(String opcode, int rs, int valueRs, int rt, int valueRt, int rd, int shamt, int funct) {
         setOpcode(opcode);
         setRs(rs);
+        setValueRS(valueRs);
         setRt(rt);
+        setValueRT(valueRt);
         setRd(rd);
         setShamt(shamt);
         setFunct(funct);
@@ -83,12 +100,28 @@ public abstract class Instructions {
         this.rs = rs;
     }
 
+    public int getValueRS() {
+        return valueRS;
+    }
+
+    public void setValueRS(int valueRS) {
+        this.valueRS = valueRS;
+    }
+
     public int getRt() {
         return rt;
     }
 
     public void setRt(int rt) {
         this.rt = rt;
+    }
+
+    public int getValueRT() {
+        return valueRT;
+    }
+
+    public void setValueRT(int valueRT) {
+        this.valueRT = valueRT;
     }
 
     public int getRd() {
@@ -123,19 +156,28 @@ public abstract class Instructions {
         this.encoding = encoding;
     }
 
-    public int getResult() {
-        return result;
+    public int getAlu() {
+        return alu;
     }
 
-    public void setResult(int result) {
-        this.result = result;
+    public void setAlu(int alu) {
+        this.alu = alu;
     }
 
-    public int getResult2() {
-        return result2;
+    public int getHi() {
+        return hi;
     }
 
-    public void setResult2(int result2) {
-        this.result2 = result2;
+    public void setHi(int hi) {
+        this.hi = hi;
     }
+
+    public int getLo() {
+        return lo;
+    }
+
+    public void setLo(int lo) {
+        this.lo = lo;
+    }
+
 }

@@ -10,19 +10,19 @@ public class EX {
         if (instruction instanceof Immediate) {
             switch (instruction.getOpcode()) {
                 case "beq":
-                    if (instruction.getRs() == instruction.getRt())
+                    if (instruction.getValueRS() == instruction.getValueRT())
                         Utils.setPc(instruction.getOffset());
                     break;
                 case "bne":
-                    if (instruction.getRs() != instruction.getRt())
+                    if (instruction.getValueRS() != instruction.getValueRT())
                         Utils.setPc(instruction.getOffset());
                     break;
                 case "bltz":
-                    if (instruction.getRs() < instruction.getRt())
+                    if (instruction.getValueRS() < instruction.getValueRT())
                         Utils.setPc(instruction.getOffset());
                     break;
                 case "bgtz":
-                    if (instruction.getRs() > instruction.getRt())
+                    if (instruction.getValueRS() > instruction.getValueRT())
                         Utils.setPc(instruction.getOffset());
                     break;
             }
@@ -33,20 +33,21 @@ public class EX {
         } else if (instruction instanceof Register) {
             switch (instruction.getOpcode()) {
                 case "add":
-                    instruction.setResult(instruction.getRs() + instruction.getRt());
+                    instruction.setAlu(instruction.getValueRS() + instruction.getValueRT());
                     break;
                 case "sub":
-                    instruction.setResult(instruction.getRs() - instruction.getRt());
+                    instruction.setAlu(instruction.getValueRS() - instruction.getValueRT());
                     break;
                 case "mult":
-                    instruction.setResult(instruction.getRs() * instruction.getRt());
+                    instruction.setLo(instruction.getValueRS() * instruction.getValueRT());
+                    instruction.setHi(instruction.getValueRS() * instruction.getValueRT());
                     break;
                 case "div":
-                    instruction.setResult(instruction.getRs() / instruction.getRt());
-                    instruction.setResult2(instruction.getRs() % instruction.getRt());
+                    instruction.setHi(instruction.getValueRS() / instruction.getValueRT());
+                    instruction.setLo(instruction.getValueRS() % instruction.getValueRT());
                     break;
                 case "jr":
-                    Utils.setPc(instruction.getRs());
+                    Utils.setPc(instruction.getValueRS());
                     break;
             }
             return instruction;

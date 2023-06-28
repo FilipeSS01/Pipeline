@@ -12,10 +12,10 @@ public class WB {
         if (instruction instanceof Immediate) {
             switch (instruction.getOpcode()) {
                 case "lw":
-                    Utils.setIndexRegister(instruction.getRt(), instruction.getResult());
+                    Utils.setIndexRegister(instruction.getRt(), instruction.getAlu());
                     break;
                 case "sw":
-                    Utils.setIndexMemory(instruction.getImmediate(), instruction.getResult());
+                    Utils.setIndexMemory(instruction.getImmediate(), instruction.getAlu());
                     break;
             }
         } else if (instruction instanceof Jump) {
@@ -24,15 +24,15 @@ public class WB {
             switch (instruction.getOpcode()) {
                 case "add":
                 case "sub":
-                    Utils.setIndexRegister(instruction.getRd(), instruction.getResult());
+                    Utils.setIndexRegister(instruction.getRd(), instruction.getAlu());
                     break;
                 case "mult":
-                    Utils.setIndexRegister(33, instruction.getResult());                    
-                    Utils.setIndexRegister(32, instruction.getResult());
+                    Utils.setIndexRegister(33, instruction.getLo());                    
+                    Utils.setIndexRegister(32, instruction.getHi());
                     break;
                 case "div":
-                    Utils.setIndexRegister(33, instruction.getResult());                    
-                    Utils.setIndexRegister(32, instruction.getResult2());
+                    Utils.setIndexRegister(33, instruction.getLo());                    
+                    Utils.setIndexRegister(32, instruction.getHi());
                     break;
                 case "jr":
                     Utils.setPc(instruction.getRs());

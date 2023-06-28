@@ -20,10 +20,10 @@ public class MEM {
         if (instruction instanceof Immediate) {
             switch (instruction.getOpcode()) {
                 case "lw":
-                    instruction.setResult(Utils.getIndexMemory(instruction.getImmediate()));
+                    instruction.setAlu(Utils.getIndexMemory(instruction.getImmediate()));
                     break;
                 case "sw":
-                    Utils.setIndexMemory(instruction.getImmediate(), instruction.getRt());
+                    Utils.setIndexMemory(instruction.getImmediate(), instruction.getValueRT());
                     break;
             }
             return instruction;
