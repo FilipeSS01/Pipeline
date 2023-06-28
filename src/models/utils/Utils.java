@@ -34,6 +34,10 @@ public class Utils {
         return Utils.pc++;
     }
 
+    public static void addToPc(int value){
+        Utils.pc += value;
+    }
+
     public static int getPc() {
         return Utils.pc;
     }
