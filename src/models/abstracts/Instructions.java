@@ -4,6 +4,7 @@ public abstract class Instructions {
     protected String opcode;
     protected int target;
     protected int immediate;
+    protected int offset;
     protected int rs;
     protected int rt;
     protected int rd;
@@ -11,16 +12,18 @@ public abstract class Instructions {
     protected int funct;
     protected int encoding;
     protected int result;
+    protected int result2;
 
     // Construction for Instruction Immediate
-    protected Instructions(String opcode, int rs, int rt, int immediate) {
+    protected Instructions(String opcode, int rs, int rt, int offset) {
         setOpcode(opcode);
         setRs(rs);
         setRt(rt);
-        setImmediate(immediate);
+        setOffset(offset);
+        // setImmediate(immediate);
     }
 
-    // Construction for Instruction Jump
+    // Construction for Instruction Jump and GetTc
     protected Instructions(String opcode, int target) {
         setOpcode(opcode);
         setTarget(target);
@@ -64,6 +67,14 @@ public abstract class Instructions {
 
     public void setImmediate(int immediate) {
         this.immediate = immediate;
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 
     public int getRs() {
@@ -120,5 +131,13 @@ public abstract class Instructions {
 
     public void setResult(int result) {
         this.result = result;
+    }
+
+    public int getResult2() {
+        return result2;
+    }
+
+    public void setResult2(int result2) {
+        this.result2 = result2;
     }
 }
