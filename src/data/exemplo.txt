@@ -1,2 +1,6 @@
 get_tc 3
 get_tc 4
+sw $lo, 4($2)
+sw $hi, 5($2)
+sw $1, 6($2)
+noop

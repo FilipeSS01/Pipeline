@@ -15,7 +15,10 @@ public class ID {
             if (instruction[0].equals("lw") || instruction[0].equals("sw")) {
                 String[] subInstruction = instruction[2].replaceAll("[()]", " ").split(" ");
                 rs = convert(subInstruction[1], true);
-                rt = convert(instruction[1], true);
+                if(instruction[1].equals("$lo") || instruction[1].equals("$hi"))
+                    rt = instruction[1].equals("$lo") ? 33 : 32;
+                else
+                    rt = convert(instruction[1], true);
                 immediate = convert(subInstruction[0], false);
             } else if (instruction[0].equals("beq") || instruction[0].equals("bne")) {
                 rs = convert(instruction[1], true);
